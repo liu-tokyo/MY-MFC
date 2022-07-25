@@ -1,4 +1,4 @@
-# vc6.0读取xml文件中的内容
+# VC6.0读取xml文件中的内容
 
 ## 软件安装
 
@@ -18,7 +18,7 @@
 
 - 新建工程
 
-  建立一个基于对话框的程序，工程名为xml。
+  建立一个基于对话框的程序，工程名为**testXML**。
 
   ![image-20220725211715890](images/image-20220725211715890.png)
 
@@ -42,7 +42,7 @@
   在对话框中增加一个按钮，ID为IDC_CREATE，我们在这个按钮的响应函数中生成一个xml文件。
   
   ```C++
-  void CXmlDlg::OnCreate()
+  void CTestXMLDlg::OnCreate()
   {
       MSXML2::IXMLDOMDocumentPtr pDoc;
       MSXML2::IXMLDOMElementPtr xmlRoot ;
@@ -86,7 +86,7 @@
   再增加一个按钮，ID为IDC_GET，在这个按钮的响应函数中读取xml文件。
 
   ```C++
-  void CXmlDlg::OnGet()
+  void CTestXMLDlg::OnGet()
   {
       // 创建DOMDocument对象
       MSXML2::IXMLDOMDocumentPtr pDoc;

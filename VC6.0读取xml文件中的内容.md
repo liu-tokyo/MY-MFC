@@ -10,6 +10,8 @@
 
     https://www.microsoft.com/zh-CN/download/confirmation.aspx?id=36292
 
+    https://www.catalog.update.microsoft.com/Search.aspx?q=973685
+    
     正常下载、安装之后，就能正常编译通过。
     
   - 本地直接下载（[简体中文](sources/msxml4-KB2758694-chs.zip)）：
@@ -22,7 +24,7 @@
 
   ![image-20220725211715890](images/image-20220725211715890.png)
 
-  按照如上画面建立工程后，**CTestXMLApp**中有如下OLE初始化代码：
+  按照如上画面建立工程后，**CTestXMLApp**中有如下**OLE**初始化代码：
 
   ```C++
   BOOL CTestXMLApp::InitInstance()
@@ -39,7 +41,7 @@
 
 - **XML创建**
 
-  在对话框中增加一个按钮，ID为IDC_CREATE，我们在这个按钮的响应函数中生成一个xml文件。
+  在对话框中增加一个按钮，ID为**IDC_CREATE**，我们在这个按钮的响应函数中生成一个xml文件。
   
   ```C++
   void CTestXMLDlg::OnCreate()
@@ -59,8 +61,8 @@
   
       MSXML2::IXMLDOMElementPtr childNode ;
       pDoc->raw_createElement((_bstr_t)(char*)"City", &childNode);
-      childNode->Puttext("WuHan");//节点值
-      childNode->setAttribute("population","8,000,000");//属性名,属性值
+      childNode->Puttext("WuHan");					// 节点值
+      childNode->setAttribute("population","8,000,000");// 属性名,属性值
       childNode->setAttribute("area","10000");
       xmlRoot->appendChild(childNode);
   
@@ -83,7 +85,7 @@
 
 - XML读取
   
-  再增加一个按钮，ID为IDC_GET，在这个按钮的响应函数中读取xml文件。
+  再增加一个按钮，ID为**IDC_GET**，在这个按钮的响应函数中读取xml文件。
 
   ```C++
   void CTestXMLDlg::OnGet()

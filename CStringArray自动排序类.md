@@ -154,3 +154,88 @@
   ```
 
   
+
+## 参照资料
+
+- 微软官方代码  
+  https://jeffpar.github.io/kbarchive/kb/120/Q120961/
+  
+- 代码
+
+  ```C++
+  MORE INFORMATION
+  ================
+  Sample Code
+  -----------
+  
+    /*
+     * Compile options needed: /MT
+     */ 
+  
+    #include <afx.h>
+    #include <iostream.h>
+    #include <afxcoll.h>
+  
+    class CSortStringArray : public CStringArray {
+    public:
+       void Sort();
+    private:
+       BOOL CompareAndSwap(int pos);
+    };
+    void CSortStringArray::Sort()
+    {
+       BOOL bNotDone = TRUE;
+  
+       while (bNotDone)
+       {
+          bNotDone = FALSE;
+          for(int pos = 0;pos < GetUpperBound();pos++)
+             bNotDone |= CompareAndSwap(pos);
+       }
+    }
+    BOOL CSortStringArray::CompareAndSwap(int pos)
+    {
+       CString temp;
+       int posFirst = pos;
+       int posNext = pos + 1;
+  
+       if (GetAt(posFirst).CompareNoCase(GetAt(posNext)) > 0)
+       {
+          temp = GetAt(posFirst);
+          SetAt(posFirst, GetAt(posNext));
+          SetAt(posNext, temp);
+          return TRUE;
+  
+       }
+       return FALSE;
+    }
+    void main()
+    {
+       CSortStringArray sortArray;
+  
+       sortArray.Add(CString("Zebra"));
+       sortArray.Add(CString("Bat"));
+       sortArray.Add(CString("Apple"));
+       sortArray.Add(CString("Mango"));
+  
+       for (int i = 0; i <= sortArray.GetUpperBound(); i++)
+          cout << sortArray[i] << endl;
+  
+       sortArray.Sort();
+       cout << endl;
+  
+       for (int j = 0; j <= sortArray.GetUpperBound(); j++)
+          cout << sortArray[j] << endl;
+    }
+  
+  Additional query words: kbinf 7.00 1.00 1.50 2.00 2.10 2.50 3.00 4.00 kbNoUpdate
+  
+  ======================================================================
+  Keywords          : kbcode kbnokeyword kbMFC kbVC100 kbVC150 kbVC200 kbVC400 kbGrpDSMFCATL 
+  Technology        : kbAudDeveloper kbMFC
+  Version           : winnt:1.0,2.0,2.1,4.0
+  Issue type        : kbhowto
+  =============================================================================
+  ```
+  
+  

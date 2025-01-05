@@ -216,7 +216,7 @@ AfxBeginThread(WorkThreadProc,event);
 //4,在主程序需要的地方调用SetEvent()设置信号量启动线程 
 SetEvent(event); 
 //-----------或者用WaitForMultipleObjects函数 
- 
+
 static UINT __stdcall WorkThreadProc(void* pThis);/*如果lParam参数为一个对话框的指针，想调用 
 这个对话框的变量或函数那么就得这样定义线程函数， 
 还要将WorkThreadProc改成CWait_forDlg::WorkThreadProc， 
@@ -2211,3 +2211,57 @@ AfxMessageBox("SQLConfigDataSource Failed");
 
 ```
 
+## 打开一个网址
+
+- 打开http://www.sina.com.cn这个站点如下：  
+  
+  ```
+  ShellExecute(NULL, "open", "http://www.sina.com.cn",NULL, NULL, SW_MAXIMIZE );
+  ```
+  
+  此命令将以默认浏览器打开http://www.sina.com.cn，并将加开后的窗口最大化。
+  
+- 又例：
+
+  ```
+  ShellExecute(NULL, "open", "IEXPLORE.exe http://www.sina.com.cn",NULL, NULL, SW_MAXIMIZE );
+  ```
+
+  此命令将直接用IE打开一个sina的站点。不过将开一个新的窗口。
+
+## 控件的注册
+
+- 注册
+  
+  ```
+  regsvr32 x:\xxx\demo.ocx //不一定非得在 Windows 系统目录
+  ```
+- 卸载
+  
+  ```
+  regsvr32 /u x:\xxx\demo.ocx
+  ```
+  
+  
+
+## 对话框透明特效
+
+- 在OnInitDialog()中加入以下代码：
+
+  ```C++
+  //加入WS_EX_LAYERED扩展属性
+  SetWindowLong(this->GetSafeHwnd(),GWL_EXSTYLE,
+  GetWindowLong(this->GetSafeHwnd(),GWL_EXSTYLE)^0x80000);
+  HINSTANCE hInst = LoadLibrary("User32.DLL");
+  if(hInst)
+  {
+      typedef BOOL (WINAPI *MYFUNC)(HWND,COLORREF,BYTE,DWORD);
+      MYFUNC fun = NULL;
+      //取得SetLayeredWindowAttributes函数指针
+      fun=(MYFUNC)GetProcAddress(hInst, "SetLayeredWindowAttributes");
+      if(fun)fun(this->GetSafeHwnd(),0,128,2);
+      FreeLibrary(hInst);
+  }
+  ```
+
+  注意：fun的参数128不能太小，否则就完全透明了！

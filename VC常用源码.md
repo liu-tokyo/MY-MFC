@@ -2213,13 +2213,13 @@ AfxMessageBox("SQLConfigDataSource Failed");
 
 ## 打开一个网址
 
-- 打开http://www.sina.com.cn这个站点如下：  
+- 打开`http://www.sina.com.cn`这个站点如下：  
   
   ```
   ShellExecute(NULL, "open", "http://www.sina.com.cn",NULL, NULL, SW_MAXIMIZE );
   ```
   
-  此命令将以默认浏览器打开http://www.sina.com.cn，并将加开后的窗口最大化。
+  此命令将以默认浏览器打开`http://www.sina.com.cn`，并将加开后的窗口最大化。
   
 - 又例：
 
